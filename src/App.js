@@ -1,20 +1,67 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
 
+// we must define any asset in public folder only, because react starts reading the files from public folder
 const url = "./data.json";
 
 const App = () => {
   const [data, setData] = useState([]);
+
+  const [isNetSalaryDisabled, setIsNetSalaryDisabled] = useState(false);
+  const [isNetSalaryRadioChecked, setIsNetSalaryRadioChecked] = useState(false);
+
+  const [isGrossSalaryDisabled, setIsGrossSalaryDisabled] = useState(false);
+  const [isGrossSalaryRadioChecked, setIsGrossSalaryRadioChecked] = useState(
+    false
+  );
+
+  // first way
+  const getDataFromJson = () => {
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then((response) => {
+        //  console.log(response);
+        return response.json();
+      })
+      .then((dataInJson) => {
+        //    console.log(dataInJson);
+        setData(dataInJson);
+      });
+  };
+
+  /*
+  // second way
   const getDataFromJson = async () => {
     // console.log("hii");
+    const response = await fetch(url, {
+      // Adding method type
+      method: "GET",
 
-    const response = await fetch(url);
+      // Adding body or contents to send
+      // for get method dont need to send the body
+      // body: JSON.stringify({
+      //   title: "foo",
+      //   body: "bar",
+      //   userId: 1
+      // }),
+
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    });
     const res = await response.json();
     // console.log(res);
-
     setData(res);
     // console.log(data);
   };
+
+  */
 
   useEffect(() => {
     getDataFromJson();
@@ -48,6 +95,47 @@ const App = () => {
             })
           : ""}
       </table>
+      <br />
+      <span>*******************************</span>
+      <h2>Disable the text field on click of Respective Radio button</h2>
+      <section>
+        <form>
+          <input
+            type="radio"
+            name="nsalary"
+            checked={isNetSalaryRadioChecked ? "checked" : ""}
+            onChange={() => {
+              setIsNetSalaryDisabled(!isNetSalaryDisabled);
+              setIsNetSalaryRadioChecked(!isNetSalaryRadioChecked);
+            }}
+          />
+          Net Salary
+          <input
+            type="text"
+            name="netsalary"
+            placeholder="Enter Net Salary Here"
+            disabled={isNetSalaryDisabled ? "disable" : ""}
+          />
+          <br />
+          <br />
+          <input
+            type="radio"
+            name="gsalary"
+            checked={isGrossSalaryRadioChecked ? "checked" : ""}
+            onChange={() => {
+              setIsGrossSalaryDisabled(!isGrossSalaryDisabled);
+              setIsGrossSalaryRadioChecked(!isGrossSalaryRadioChecked);
+            }}
+          />
+          Gross Salary
+          <input
+            type="text"
+            name="grosssalary"
+            placeholder="Enter Gross Salary Here"
+            disabled={isGrossSalaryDisabled ? "disable" : ""}
+          />
+        </form>
+      </section>
     </div>
   );
 };
