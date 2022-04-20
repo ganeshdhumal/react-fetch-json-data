@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "name": "Ganesh Dhumal",
+    "about": "Software Developer",
+    "address": "Solapur",
+    "company": "FPII"
+  },
+  {
+    "id": "2",
+    "name": "Amod Kore",
+    "about": "Data Scientist",
+    "address": "Germany",
+    "company": "ABC"
+  },
+  {
+    "id": "3",
+    "name": "Shivaji Shinde",
+    "about": "UI Developer",
+    "address": "Latur",
+    "company": "LTI"
+  },
+  {
+    "id": "4",
+    "name": "Vinayak Dongare",
+    "about": "Tester",
+    "address": "Ratnagiri",
+    "company": "Synichron"
+  }
+]
